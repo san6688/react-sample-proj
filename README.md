@@ -1,4 +1,4 @@
-This Sample To-Do Task React project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To-Do Task React project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Description
 React demo app which covers basic functionality of React js along with react router and redux for state management.
