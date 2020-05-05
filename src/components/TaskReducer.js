@@ -1,4 +1,4 @@
-import { MARK_COMPLETE } from './TaskActionType';
+import { MARK_COMPLETE, DELETE_TASK, CREATE_TASK } from './TaskActionType';
 import * as Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
@@ -40,6 +40,16 @@ const TaskReducer = (state = initialState, action) => {
       let tmpTask = state.get('tasks').get(index);
       tmpTask = tmpTask.set('isCompleted',!tmpTask.get('isCompleted'));
       return state.set('tasks', state.get('tasks').set(index, tmpTask));
+    }
+    case DELETE_TASK:{
+      let id = action.payload.itemId;
+      let index = state.get('tasks').findIndex((_task) => _task.get('id') === id);
+      return state.set('tasks', state.get('tasks').delete(index));
+    }
+    case CREATE_TASK: {
+      let newTask = Immutable.Map(action.payload.newTask);
+      newTask = newTask.set('id', state.get('tasks').size + 1);
+      return state.set('tasks', state.get('tasks').push(newTask));
     }
     default:
       return  state;
