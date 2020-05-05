@@ -1,6 +1,7 @@
 import { MARK_COMPLETE } from './TaskActionType';
+import * as Immutable from 'immutable';
 
-const initialState = {
+const initialState = Immutable.fromJS({
   tasks: [
     {
       id: 1,
@@ -29,18 +30,16 @@ const initialState = {
     },
     
   ]
-};
+});
 
 const TaskReducer = (state = initialState, action) => {
   switch(action.type){
-    case MARK_COMPLETE: {
-      let id = action.payload.itemId;
-      let index = state.tasks.findIndex((_task) => _task.id === id); 
-      let copyTasks = state.tasks.slice();
-      let tmpTask= copyTasks[index];
-      tmpTask.isCompleted = !tmpTask.isCompleted;
-      copyTasks[index] = tmpTask
-      return ({ tasks: copyTasks });
+    case MARK_COMPLETE: {      
+      let id = action.payload.itemId; 
+      let index = state.get('tasks').findIndex((_task) => _task.get('id') === id);
+      let tmpTask = state.get('tasks').get(index);
+      tmpTask = tmpTask.set('isCompleted',!tmpTask.get('isCompleted'));
+      return state.set('tasks', state.get('tasks').set(index, tmpTask));
     }
     default:
       return  state;

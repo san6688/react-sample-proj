@@ -56,7 +56,7 @@ class TaskList extends React.Component {
     justify="space-around"
   alignItems="center">
         {
-          this.props.tasksFromStore.map((_task) => <Grid item xs={12} style={{marginLeft: 40}}><Task item={_task} handleComplete={this.markAsComplete}/></Grid>)
+          this.props.tasksFromStore.map((_task) => <Grid item xs={12} style={{marginLeft: 40}}><Task item={_task} /></Grid>)
         }  
         </Grid>
         
@@ -68,7 +68,7 @@ class TaskList extends React.Component {
 //redux
 const mapStateToProps = (state) => {
   return {
-    tasksFromStore: state.tasks
+    tasksFromStore: state.taskState.get('tasks')
   }
 }
 
