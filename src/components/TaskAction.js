@@ -1,4 +1,4 @@
-import { MARK_COMPLETE, DELETE_TASK, CREATE_TASK } from './TaskActionType';
+import { MARK_COMPLETE, DELETE_TASK, CREATE_TASK, UPDATE_TASK } from './TaskActionType';
 
 //Action Creator
 
@@ -21,5 +21,12 @@ export const createTaskAction = (newTask) => {
   return {
     type: CREATE_TASK,
     payload: { newTask },
+  }
+}
+
+export const updateTaskAction = (updatedTask) => {
+  return {
+    type: UPDATE_TASK,
+    payload: { task : updatedTask }
   }
 }

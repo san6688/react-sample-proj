@@ -4,9 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { markCompleteAction, deleteTaskAction } from './TaskAction';
+import { updateModeAction } from './TaskFormAction';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 import IconButton from '@material-ui/core/IconButton';
+import UpdateIcon from '@material-ui/icons/Update';
 
 const getColor = (priority) => {
   let color = 'black';
@@ -37,6 +39,10 @@ const Task = (props) => {
     props.deleteTaskAction(props.item.get('id'));
   }
 
+  const handleUpdate = () => {
+    props.updateModeAction(props.item);
+  }
+
   return (
     <Card  style={{ width: '50%', height: 80, paddingTop: 10}} variant="outlined" >
       <Typography variant="h5" style={{ color: getColor(props.item.get('priority')), textDecoration: (props.item.get('isCompleted') ? 'line-through' : '')}}>{props.item.get('description')}</Typography>
@@ -46,6 +52,9 @@ const Task = (props) => {
       <IconButton onClick={handleDelete}>
         <DeleteIcon color="secondary" />
       </IconButton>
+      <IconButton onClick={handleUpdate}>
+        <UpdateIcon color="secondary" />
+      </IconButton>
     </Card>
   );
 }
@@ -53,7 +62,8 @@ const Task = (props) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     markCompleteAction,
-    deleteTaskAction,  
+    deleteTaskAction,
+    updateModeAction,
   },dispatch);
 }
 
